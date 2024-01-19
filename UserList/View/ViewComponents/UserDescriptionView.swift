@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-
-
-
+// NEW_BL: user description structure, possible to indicate if date is displayed or not
 struct UserDescriptionView: View {
     let user: User
     let withDate: Bool

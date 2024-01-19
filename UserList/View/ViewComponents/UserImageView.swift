@@ -7,14 +7,15 @@
 
 import SwiftUI
 
+// NEW_BL: user image structure, possible to indicate the size of image
 struct UserImageView: View {
     let user: User
     let imageSize: ImageSize
-
+    
     enum ImageSize {
         case large, medium, thumbnail
     }
-
+    
     var body: some View {
         AsyncImage(url: URL(string: imageUrl)) { image in
             image
@@ -28,10 +29,13 @@ struct UserImageView: View {
                 .clipShape(Circle())
         }
     }
+}
 
-    // MARK: Private properties
+// MARK: Private properties
 
-    private var imageUrl: String {
+private extension UserImageView {
+
+    var imageUrl: String {
         switch imageSize {
         case .large:
             return user.picture.large
@@ -42,7 +46,7 @@ struct UserImageView: View {
         }
     }
 
-    private var imageWidth: CGFloat {
+    var imageWidth: CGFloat {
         switch imageSize {
         case .large:
             return 200
