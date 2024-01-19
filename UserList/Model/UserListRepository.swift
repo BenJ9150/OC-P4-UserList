@@ -25,8 +25,11 @@ struct UserListRepository {
 
         let (data, _) = try await executeDataRequest(request)
 
+        // NEWBEN:
         let response = try JSONDecoder().decode(UserListResponse.self, from: data)
-        
-        return response.results.map(User.init)
+        return response.results
+        //OLD:
+//        let response = try JSONDecoder().decode(UserListResponse.self, from: data)
+//        return response.results.map(User.init)
     }
 }
