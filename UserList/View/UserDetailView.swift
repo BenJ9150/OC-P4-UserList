@@ -5,7 +5,10 @@ struct UserDetailView: View {
     
     var body: some View {
         VStack {
-            UserDescriptionView(user: user, imageSize: .large, withDate: true)
+            // NEW_BL: use common struct to reduce code
+            UserImageView(user: user, imageSize: .large)
+            UserDescriptionView(user: user, withDate: true)
+                .padding()
             Spacer()
         }
         .navigationTitle("\(user.name.first) \(user.name.last)")

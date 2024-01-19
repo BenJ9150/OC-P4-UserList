@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// NEW_BL: new class to create ViewModel
 final class UserListViewModel: ObservableObject {
 
     // MARK: - Private properties

@@ -4,7 +4,7 @@ struct UserListView: View {
     // TODO: - Those properties should be viewModel's OutPuts
     @State private var isGridView = false // Ben: même celle là ??
 
-    // NEWBEN : observed viewModel to respect MVVM pattern
+    // NEW_BL: observed viewModel to respect MVVM pattern
     @ObservedObject var viewModel: UserListViewModel
     
     var body: some View {
@@ -13,7 +13,9 @@ struct UserListView: View {
                 List(viewModel.users) { user in
                     NavigationLink(destination: UserDetailView(user: user)) {
                         HStack {
-                            UserDescriptionView(user: user, imageSize: .thumbnail, withDate: true) // NEWBEN
+                            // NEW_BL: use common struct to reduce code
+                            UserImageView(user: user, imageSize: .thumbnail)
+                            UserDescriptionView(user: user, withDate: true)
                         }
                     }
                     .onAppear {
@@ -50,7 +52,8 @@ struct UserListView: View {
                         ForEach(viewModel.users) { user in
                             NavigationLink(destination: UserDetailView(user: user)) {
                                 VStack {
-                                    UserDescriptionView(user: user, imageSize: .medium, withDate: false) // NEWBEN
+                                    UserImageView(user: user, imageSize: .medium) // NEWBEN
+                                    UserDescriptionView(user: user, withDate: false) // NEWBEN
                                 }
                             }
                             .onAppear {
