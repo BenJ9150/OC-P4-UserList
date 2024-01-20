@@ -1,16 +1,13 @@
 import SwiftUI
 
 struct UserListView: View {
-    // TODO: - Those properties should be viewModel's OutPuts
-    @State private var isGridView = false // Ben: même celle là ??
-
     // NEW_BL: observed viewModel to respect MVVM pattern
-    @ObservedObject var viewModel: UserListViewModel
+    @StateObject private var viewModel = UserListViewModel()
     
     var body: some View {
         NavigationView {
             Group {
-                if !isGridView {
+                if !viewModel.isGridView {
                     List(viewModel.users) { user in
                         // NEW_BL: use common private struct to reduce code
                         UserRowView(viewModel: viewModel, user: user, lightDisplay: false)
@@ -28,14 +25,8 @@ struct UserListView: View {
             }
             .navigationTitle("Users")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    // NEW_BL: use private var reduce code
-                    toolbarPicker
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    // NEW_BL: use private var reduce code
-                    toolbarRefreshButton
-                }
+                // NEW_BL: use private func to reduce code
+                userListToolbar()
             }
         }
         .onAppear {
@@ -71,38 +62,37 @@ private extension UserListView {
                 }
             }
             .onAppear {
-                if self.viewModel.shouldLoadMoreData(currentItem: user) {
-                    self.viewModel.fetchUsers()
-                }
+                self.viewModel.shouldLoadMoreData(currentItem: user)
             }
         }
     }
 }
 
-// MARK: Toolbar items
+// MARK: Toolbar
 
 private extension UserListView {
 
-    // NEW_BL: picker of toolbar property
-    var toolbarPicker: some View {
-        Picker(selection: $isGridView, label: Text("Display")) {
-            Image(systemName: "rectangle.grid.1x2.fill")
-                .tag(true)
-                .accessibilityLabel(Text("Grid view"))
-            Image(systemName: "list.bullet")
-                .tag(false)
-                .accessibilityLabel(Text("List view"))
+    // NEW_BL: toolbar items of user list
+    @ToolbarContentBuilder
+    func userListToolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Picker(selection: $viewModel.isGridView, label: Text("Display")) {
+                Image(systemName: "rectangle.grid.1x2.fill")
+                    .tag(true)
+                    .accessibilityLabel(Text("Grid view"))
+                Image(systemName: "list.bullet")
+                    .tag(false)
+                    .accessibilityLabel(Text("List view"))
+            }
+            .pickerStyle(SegmentedPickerStyle())
         }
-        .pickerStyle(SegmentedPickerStyle())
-    }
-
-    // NEW_BL: refresh button of toolbar property
-    var toolbarRefreshButton: some View {
-        Button(action: {
-            self.viewModel.reloadUsers()
-        }) {
-            Image(systemName: "arrow.clockwise")
-                .imageScale(.large)
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(action: {
+                self.viewModel.reloadUsers()
+            }) {
+                Image(systemName: "arrow.clockwise")
+                    .imageScale(.large)
+            }
         }
     }
 }
@@ -111,6 +101,6 @@ private extension UserListView {
 
 struct UserListView_Previews: PreviewProvider {
     static var previews: some View {
-        UserListView(viewModel: UserListViewModel())
+        UserListView()
     }
 }

@@ -18,14 +18,20 @@ final class UserListViewModel: ObservableObject {
     // MARK: - Outputs
 
     @Published var users: [User] = []
-
-    // TODO: - Should be an OutPut
-    func shouldLoadMoreData(currentItem item: User) -> Bool {
-        guard let lastItem = users.last else { return false }
-        return !isLoading && item.id == lastItem.id
-    }
+    @Published var isGridView = false
 
     // MARK: - Inputs
+
+    // NEW_BL: shouldLoadMoreData modified to directly integrate the fetchUsers call
+    func shouldLoadMoreData(currentItem item: User) {
+        guard let lastItem = users.last, !isLoading, item.id == lastItem.id else { return }
+        fetchUsers()
+    }
+    // OLD
+//    func shouldLoadMoreData(currentItem item: User) -> Bool {
+//        guard let lastItem = users.last else { return false }
+//        return !isLoading && item.id == lastItem.id
+//    }
 
     func fetchUsers() {
         isLoading = true
