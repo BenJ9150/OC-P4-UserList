@@ -10,6 +10,10 @@ import SwiftUI
 // NEW_BL: new class to create ViewModel
 final class UserListViewModel: ObservableObject {
 
+    // MARK: - Unit test property
+
+    let fetchUsersQty = 20
+    
     // MARK: - Private properties
 
     private let repository = UserListRepository()
@@ -37,7 +41,7 @@ final class UserListViewModel: ObservableObject {
         isLoading = true
         Task {
             do {
-                let users = try await repository.fetchUsers(quantity: 20)
+                let users = try await repository.fetchUsers(quantity: fetchUsersQty)
                 DispatchQueue.main.async {
                     self.users.append(contentsOf: users)
                     self.isLoading = false

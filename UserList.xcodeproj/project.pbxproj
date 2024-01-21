@@ -21,6 +21,7 @@
 		438130B02B5A85A800323F23 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438130AF2B5A85A800323F23 /* UserListViewModel.swift */; };
 		438130B42B5ABC9200323F23 /* UserDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438130B32B5ABC9200323F23 /* UserDescriptionView.swift */; };
 		438130B72B5AE99100323F23 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438130B62B5AE99100323F23 /* UserImageView.swift */; };
+		43E7689F2B5D8A43006AE508 /* UserListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E7689E2B5D8A43006AE508 /* UserListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		438130AF2B5A85A800323F23 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		438130B32B5ABC9200323F23 /* UserDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDescriptionView.swift; sourceTree = "<group>"; };
 		438130B62B5AE99100323F23 /* UserImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
+		43E7689E2B5D8A43006AE508 /* UserListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				2F015BA72ACC938F009A098C /* UserListRepositoryTests.swift */,
 				2FB4823B2ACC98DD0016CBA7 /* UserList.xctestplan */,
+				43E7689E2B5D8A43006AE508 /* UserListViewModelTests.swift */,
 			);
 			path = UserListTests;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F015BA82ACC938F009A098C /* UserListRepositoryTests.swift in Sources */,
+				43E7689F2B5D8A43006AE508 /* UserListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
