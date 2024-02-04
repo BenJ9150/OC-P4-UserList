@@ -8,23 +8,26 @@
 import SwiftUI
 
 // NEW_BL: new class to create ViewModel
+
 final class UserListViewModel: ObservableObject {
-
-    // MARK: - Unit test property
-
-    let fetchUsersQty = 20
     
-    // MARK: - Private properties
+    // MARK: Private properties
 
-    private let repository = UserListRepository()
+    private let repository: UserFetch // NEW_BL: use UserFetch protocol instead of UserListRepository (for unit test)
     private var isLoading = false
 
-    // MARK: - Outputs
+    // MARK: Init
+    
+    init(repository: UserFetch = UserListRepository()) { // NEW_BL: add init for use custom repository in unit test
+        self.repository = repository
+    }
+
+    // MARK: Outputs
 
     @Published var users: [User] = []
     @Published var isGridView = false
 
-    // MARK: - Inputs
+    // MARK: Inputs
 
     // NEW_BL: shouldLoadMoreData modified to directly integrate the fetchUsers call
     func shouldLoadMoreData(currentItem item: User) {
@@ -41,8 +44,8 @@ final class UserListViewModel: ObservableObject {
         isLoading = true
         Task {
             do {
-                let users = try await repository.fetchUsers(quantity: fetchUsersQty)
-                DispatchQueue.main.async {
+                let users = try await repository.fetchUsers(quantity: 20)
+                await MainActor.run {
                     self.users.append(contentsOf: users)
                     self.isLoading = false
                 }

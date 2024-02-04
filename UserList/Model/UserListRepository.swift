@@ -1,6 +1,14 @@
 import Foundation
 
-struct UserListRepository {
+// MARK:  UserFetch Protocol
+
+protocol UserFetch { // NEW_BL: Protocol to change fetchUsers method in unit test
+    func fetchUsers(quantity: Int) async throws -> [User]
+}
+
+// MARK:  UserListRepository struct
+
+struct UserListRepository: UserFetch { // NEW_BL: Add UserFetch protocol
 
     private let executeDataRequest: (URLRequest) async throws -> (Data, URLResponse)
 
