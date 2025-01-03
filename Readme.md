@@ -1,3 +1,29 @@
+# OpenClassrooms : Refactorisez une appli iOS monolithique
+
+Ce projet fait partie du parcours "Développeur d'application iOS" d'OpenClassrooms (projet 4, partie 2).
+
+L'objectif de ce projet consistait à réorganiser l'application en utilisant le modèle MVVM (Model-View-ViewModel) et en utilisant la librairie SwiftUI.
+
+# Captures d'écran de l'application
+
+<table style="border: none">
+  <tr>
+    <td align="center">
+      <img src="Screenshots/1_UsersGrid.png" alt="Users to grid" width="200"><br>
+      Users to grid
+    </td>
+    <td align="center">
+      <img src="Screenshots/2_UsersList.png" alt="Users to list" width="200"><br>
+      Users to list
+    </td>
+    <td align="center">
+      <img src="Screenshots/3_UserDetails.png" alt="User details" width="200"><br>
+      User details
+    </td>
+  </tr>
+</table>
+
+
 # SwiftUI User List
 
 <img width="300" alt="User List App" src="https://github.com/OpenClassrooms-Student-Center/DA-iOS_P4_exercise-2/assets/10169030/026e4b94-84d7-4d07-a07b-ab30654dea80">
